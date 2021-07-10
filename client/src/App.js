@@ -1,22 +1,23 @@
+// Dependencies
+import React from 'react';
+import { Container } from '@material-ui/core';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-function App() {
+// Components
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import Auth from './components/Auth/Auth';
+
+const App = () => {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Container maxWidth="xl">
+        <Navbar />
+      </Container>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
