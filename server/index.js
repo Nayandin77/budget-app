@@ -23,7 +23,7 @@ app.get("/api", function(res, req, next) {
     next("Test");
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5100;
 
 mongoose.connect(process.env.CONNTECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
