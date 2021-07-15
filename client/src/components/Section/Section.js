@@ -1,10 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Container, Card, Typography } from '@material-ui/core';
 
 const Section = () => {
     return (
-        <div>
-            
-        </div>
+        <Container>
+            <Card>
+                <Typography>
+                    Section
+                </Typography>
+            </Card>
+        </Container>
     )
 }
 
