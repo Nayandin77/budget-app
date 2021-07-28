@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Card, Typography, IconButton, CardContent, FormControl, FormLabel,
-         RadioGroup, FormControlLabel, Radio, } from '@material-ui/core';
+         RadioGroup, FormControlLabel, Radio, Button} from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
 import format from 'date-fns/format';
 import isValid from 'date-fns/isValid';
@@ -11,6 +11,8 @@ import isWithinInterval from 'date-fns/isWithinInterval';
 import clsx from 'clsx';
 
 import useStyles from './styles';
+import { monthNames } from './DateEnum/dateEnum';
+
 
 const Calender = () => {
     const [selectedDate, handleDateChange] = useState(new Date());
@@ -23,13 +25,6 @@ const Calender = () => {
     const handleValue = (e) => {
         setValue(e.target.value);
     };
-
-    const handleDate = (e) => {
-        const date = new Date(e);
-        console.log(date.getMonth());
-        // handleDateChange(e.target.value.month);
-    }
-
 
     // const { selectedDate } = state.selectedDate;
 
@@ -79,6 +74,9 @@ const Calender = () => {
 
     return (
         <Container>
+            <Button>
+                Test
+            </Button>
             <Card >
                 <CardContent>
                     <Typography className={classes.cardTitle} variant="h5">
@@ -97,14 +95,14 @@ const Calender = () => {
                             label="Year / Month"
                             helperText="Select Year and a Month"
                             value={selectedDate}
-                            onChange={handleDate}
+                            onChange={handleDateChange}
                         />
                     ) : (
                         <DatePicker
                             label="Week of Year / Month"
                             helperText="Select Year, Month, and a Week"
                             value={selectedDate}
-                            // onChange={handleWeekChange}
+                            //onChange={handleWeekChange}
                             renderDay={renderWrappedWeekDay}
                             labelFunc={formatWeekSelectLabel}
                         />
