@@ -13,6 +13,8 @@ import clsx from 'clsx';
 import useStyles from './styles';
 import { monthNames } from './DateEnum/dateEnum';
 
+import { getAmount } from '../../actions/month';
+
 
 const Calender = () => {
     const [selectedDate, handleDateChange] = useState(new Date());
@@ -22,8 +24,11 @@ const Calender = () => {
     // };
     const classes = useStyles();
 
-    const handleValue = (e) => {
+    const handleValue = async (e) => {
+        e.preventDefault();
+
         setValue(e.target.value);
+        console.log(e);
     };
 
     // const { selectedDate } = state.selectedDate;
