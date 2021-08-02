@@ -20,10 +20,11 @@ import { getAmount } from '../../actions/month';
 
 export default class Calender extends React.Component {
     state = {
-        date: ({ month: new Date().getMonth(), year: new Date().getFullYear() }),
-
+        selectedDate: ({ month: new Date().getMonth(), year: new Date().getFullYear() }),
+        monthWeel: "month",
     }
-    // const [selectedDate, handleDateChange] = useState(new Date());
+
+    classes = useStyles();
     // const [selectedDate, handleDateChange] = useState({ month: new Date().getMonth(), year: new Date().getFullYear() });
     
     // const dispatch = useDispatch();
@@ -87,7 +88,6 @@ export default class Calender extends React.Component {
     */
 
     render() {
-        classes = useStyles();
         return (
             
             <Container>
@@ -101,12 +101,12 @@ export default class Calender extends React.Component {
                     </Typography>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">View by:</FormLabel>
-                        <RadioGroup row aria-label="View by" name="view" value={monthWeek} onChange={this.handleValue}>
+                        <RadioGroup row aria-label="View by" name="view" value={this.state.monthWeek} onChange={this.handleValue}>
                             <FormControlLabel value="month" control={<Radio />} label="Month" />
                             <FormControlLabel value="week" control={<Radio />} label="Week" />
                         </RadioGroup>
                     </FormControl>
-                    { monthWeek === "month" ? (
+                    { this.state.monthWeek === "month" ? (
                         <DatePicker
                             views={["year", "month"]}
                             label="Year / Month"
