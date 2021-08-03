@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const monthSchema = mongoose.Schema({
-    id: { type: String },   
+    _id: { type: String },   
     month: { type: String, required:  true },
     year: { type: String, required: true },
     monthBudget: String,

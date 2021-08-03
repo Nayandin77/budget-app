@@ -59,3 +59,19 @@ export const getSection = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
+
+export const createMonth = async (req, res) => {
+    const date = req.body;
+
+    console.log("Test change");
+
+    const newDate = new Month({ ...date });
+
+    try {
+        await newDate.save();
+
+        res.status(201).json(newDate);    
+    } catch (error) {    
+        res.status(404).json({ message: error.message });
+    }
+}

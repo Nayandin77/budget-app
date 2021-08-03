@@ -14,37 +14,24 @@ import { useDispatch } from 'react-redux';
 import useStyles from './styles';
 import { monthNames } from './DateEnum/dateEnum';
 
-import { getAmount } from '../../actions/month';
+import { createMonth } from '../../actions/month';
 
 
 
-export default class Calender extends React.Component {
-    state = {
-        selectedDate: ({ month: new Date().getMonth(), year: new Date().getFullYear() }),
-        monthWeel: "month",
-    }
+const Calender = (props) => {
+    const classes = useStyles();
 
-    classes = useStyles();
-    // const [selectedDate, handleDateChange] = useState({ month: new Date().getMonth(), year: new Date().getFullYear() });
-    
-    // const dispatch = useDispatch();
+    const [selectedDate, handleDate] = useState({ month: new Date().getMonth(), year: new Date().getFullYear(), _id: '' });
+    const [monthWeek, handleValue] = useState("month");
+    const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     console.log('Date' + selectedDate);
-    // }, [])
+    const handleSubmit = async (date) => { 
+        // console.log(props.user);
+        let id = String(date.getMonth()) + String(date.getFullYear());
+        handleDate({ month: date.getMonth(), year: date.getFullYear(), _id: id });
 
-    handleValue = async (e) => {
-        e.preventDefault();
-
-        // setValue(e.target.value);
-    };
-
-    handleSubmit = (e) => { 
-        // handleDateChange()
-        // setValue({
-        //     selectedDate = 
-        // })
-    }
+        dispatch(createMonth( selectedDate ));
+    }        
 
     /*
     formatWeekSelectLabel = (date, invalidLabel) => {
@@ -54,8 +41,9 @@ export default class Calender extends React.Component {
           ? `Week of ${format(startOfWeek(dateClone), "MMM do")}`
           : invalidLabel;
     };
-
+    
     renderWrappedWeekDay = (date, selectedDate, dayInCurrentMonth) => {
+        const { classes } = this.props;
         let dateClone = date;
         let selectedDateClone = selectedDate;
     
@@ -87,10 +75,8 @@ export default class Calender extends React.Component {
     };
     */
 
-    render() {
-        return (
-            
-            <Container>
+    return (
+        <Container>
             <Button>
                 Test
             </Button>
@@ -101,37 +87,43 @@ export default class Calender extends React.Component {
                     </Typography>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">View by:</FormLabel>
-                        <RadioGroup row aria-label="View by" name="view" value={this.state.monthWeek} onChange={this.handleValue}>
+                        <RadioGroup row aria-label="View by" name="view" value={monthWeek} onChange={() => handleValue( monthWeek === "month" ? "week" : "month")}>
                             <FormControlLabel value="month" control={<Radio />} label="Month" />
                             <FormControlLabel value="week" control={<Radio />} label="Week" />
                         </RadioGroup>
                     </FormControl>
-                    { this.state.monthWeek === "month" ? (
-                        <DatePicker
-                            views={["year", "month"]}
-                            label="Year / Month"
-                            helperText="Select Year and a Month"
-                            value={selectedDate}
-                            onChange={this.handleDateChange()}
-                        />
+                    { monthWeek === "month" ? (
+                        <div>
+                            <DatePicker
+                                views={["year", "month"]}
+                                label="Year / Month"
+                                helperText="Select Year and a Month"
+                                value={selectedDate}
+                                // onChange={(date) => handleDateChange(date)}
+                                onChange= { handleDate }
+                            />
+                            <Button onClick={() => handleSubmit(selectedDate)} variant="contained" color="primary" size="large" type="submit" fullWidth>Select</Button>
+                        </div>
                     ) : (
-                        <DatePicker
-                            label="Week of Year / Month"
-                            helperText="Select Year, Month, and a Week"
-                            value={selectedDate}
-                            //onChange={handleWeekChange}
-                            renderDay={this.renderWrappedWeekDay()}
-                            labelFunc={this.formatWeekSelectLabel()}
-                        />
+                        <div>
+                            Fix later
+                        </div>
+                        // <DatePicker
+                        //     label="Week of Year / Month"
+                        //     helperText="Select Year, Month, and a Week"
+                        //     value={this.state.selectedDate}
+                        //     //onChange={handleWeekChange}
+                        //     renderDay={this.renderWrappedWeekDay()}
+                        //     labelFunc={this.formatWeekSelectLabel()}
+                        // />
                     )}
-                    <Button onClick={handleSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Select</Button>
                     {/* <Typography>
                         {selectedDate.month}
                     </Typography> */}
                 </CardContent>
             </Card>
         </Container>
-        )
-    }
+    );
 }
 
+export default Calender;
