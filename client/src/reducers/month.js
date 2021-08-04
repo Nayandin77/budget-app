@@ -9,10 +9,7 @@ export default (state = { isLoading: true, months: [] }, action) => {
         case CREATE:
             return { 
                 ...state.months,
-                // {
-
-                // }
-                months: action.payload.data 
+                month: action.payload.data 
             };
         case FETCH_ALL:
             return { 

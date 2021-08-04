@@ -23,6 +23,12 @@ app.get("/api", function(res, req, next) {
     next("Test");
 });
 
+// app.get(`/api/month`, function(req, res, next) {
+//   console.log("test");
+//   next("Test email");
+// });
+
+
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.CONNTECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

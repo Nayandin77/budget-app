@@ -35,7 +35,8 @@ const Calender = (props) => {
     }
 
     const grabMonth = () => {
-        dispatch(getMonths(props.user.result.email));
+        const email = {"userEmail": props.user.result.email};
+        dispatch(getMonths(email));
     }
 
     // useEffect(() => {

@@ -18,10 +18,10 @@ export const createMonth = async (req, res) => {
 }
 
 export const getMonths = async (req, res) => {
-    const { userEmail } = req.body;
+    const userEmail  = req.body.userEmail;
 
     try {
-        const months = await Month.find();
+        const months = await Month.find({ "createdBy": userEmail });
 
         res.json({ data: months });    
     } catch (error) {    

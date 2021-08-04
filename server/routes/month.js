@@ -10,6 +10,10 @@ import { createMonth, getMonths, } from "../controllers/month.js";
 
 
 router.post("/", auth, createMonth);
-router.get("/", auth, getMonths);
+router.post("/months", auth, getMonths);
+// router.get("/months", function(req, res, next) {
+//     next("Hello test");
+//     console.log("test!");
+// })
 
 export default router;

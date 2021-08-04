@@ -18,7 +18,9 @@ const authReducer = (state = { authData: null }, action) => {
         ...state, 
         authData: null, 
         loading: false, 
-        errors: null };
+        errors: null,
+        ...state.months = null,
+      };
     default:
       return state;
   }

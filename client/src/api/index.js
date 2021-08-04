@@ -10,9 +10,8 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
-
-export const createMonth = (date) => API.post('/month', date);
-export const getMonths = (userEmail) => API.get(`/month`, userEmail);
+export const getMonths = (userEmail) => API.post(`/month/months`, userEmail);
+export const createMonth = (date) => API.post('/month/', date);
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);

@@ -1,0 +1,22 @@
+Visualization of Client <-> Backend
+
+Auth.js
+- User creates account
+    - AUTH state gets created       (DONE)
+    - Mongo records User            (DONE)
+- User logs in
+    - AUTH state gets created       (DONE)
+    - MONTH state gets created
+    - API retrieves info User from Mongo (DONE)
+    - API retrieves info Months from Mongo (DONE)
+- User logs out
+    - AUTH state is cleared         (DONE)
+    - MONTH state is cleared        (DONE)
+
+Home.js
+- Share User with all components (maybe with state I can fix auth from going null on refresh)
+- Display Sign In text if AUTH || locolstorage.profile is empty           (DONE)
+- Display components                                                      (DONE)
+
+Calender.js
+- 
