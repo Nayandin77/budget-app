@@ -18,7 +18,7 @@ export const signin = async (req, res) => {
   
       if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
   
-      const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "1h" });
+      const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "6h" });
   
       res.status(200).json({ result: oldUser, token });
     } catch (err) {
@@ -30,15 +30,18 @@ export const signin = async (req, res) => {
     const { email, password, firstName, lastName } = req.body;
   
     try {
+      // If a User already existed
       const oldUser = await UserModal.findOne({ email });
-  
       if (oldUser) return res.status(400).json({ message: "User already exists" });
   
+      // Generate a crypted password
       const hashedPassword = await bcrypt.hash(password, 12);
   
+      // Create a User
       const result = await UserModal.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
-  
-      const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "1h" } );
+
+      // Produce a token
+      const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "6h" } );
   
       res.status(201).json({ result, token });
     } catch (error) {

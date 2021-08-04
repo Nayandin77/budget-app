@@ -1,17 +1,16 @@
-import { START_LOADING, FETCH_AMOUNT, CREATE } from '../constants/actionTypes';
+import { START_LOADING, CREATE, FETCH_BY_ID, FETCH_ALL } from '../constants/actionTypes';
 import * as api from '../api/index';
 
-export const getAmount = (id) => async (dispatch) => {
-    try {
-        dispatch({ type: START_LOADING });
+export const getMonths = (userEmail) => async (dispatch) => {
+  
+  try {
+    const { data } = await api.getMonths(userEmail);
 
-        const { data } = await api.fetchAmount(id);
-
-        dispatch({ type: FETCH_AMOUNT, payload: { amount: data } });
-    } catch (error) {
-        console.log(error);
-    }
-}
+    dispatch({ type: FETCH_ALL, payload: data });  
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const createMonth = (date) => async (dispatch) => {
     try {

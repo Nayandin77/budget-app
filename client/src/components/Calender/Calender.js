@@ -9,29 +9,39 @@ import endOfWeek from 'date-fns/endOfWeek';
 import startOfWeek from 'date-fns/startOfWeek';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import clsx from 'clsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
 import { monthNames } from './DateEnum/dateEnum';
 
-import { createMonth } from '../../actions/month';
-
-
+import { createMonth, getMonths } from '../../actions/month';
 
 const Calender = (props) => {
     const classes = useStyles();
 
-    const [selectedDate, handleDate] = useState({ month: new Date().getMonth(), year: new Date().getFullYear(), _id: '' });
-    const [monthWeek, handleValue] = useState("month");
+    const [selectedDate, handleSelectedDate] = useState(new Date());
+    const [monthWeek, handleToggle] = useState("month");
+
     const dispatch = useDispatch();
 
-    const handleSubmit = async (date) => { 
-        // console.log(props.user);
-        let id = String(date.getMonth()) + String(date.getFullYear());
-        handleDate({ month: date.getMonth(), year: date.getFullYear(), _id: id });
+    const handleSubmit = () => { 
+        const parseDate = ({
+            createdBy: props.user.result.email,
+            month: selectedDate.getMonth(), 
+            year: selectedDate.getFullYear(), 
+            _id: String(selectedDate.getMonth()) + String(selectedDate.getFullYear()) + String(props.user.result._id) 
+        });
+        dispatch(createMonth(parseDate));
+    }
 
-        dispatch(createMonth( selectedDate ));
-    }        
+    const grabMonth = () => {
+        dispatch(getMonths(props.user.result.email));
+    }
+
+    // useEffect(() => {
+        // if (props.user)
+        // dispatch(getMonths(props.user.result.email));
+    // }, [dispatch, props.user])
 
     /*
     formatWeekSelectLabel = (date, invalidLabel) => {
@@ -87,7 +97,7 @@ const Calender = (props) => {
                     </Typography>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">View by:</FormLabel>
-                        <RadioGroup row aria-label="View by" name="view" value={monthWeek} onChange={() => handleValue( monthWeek === "month" ? "week" : "month")}>
+                        <RadioGroup row aria-label="View by" name="view" value={monthWeek} onChange={() => handleToggle( monthWeek === "month" ? "week" : "month")}>
                             <FormControlLabel value="month" control={<Radio />} label="Month" />
                             <FormControlLabel value="week" control={<Radio />} label="Week" />
                         </RadioGroup>
@@ -99,14 +109,14 @@ const Calender = (props) => {
                                 label="Year / Month"
                                 helperText="Select Year and a Month"
                                 value={selectedDate}
-                                // onChange={(date) => handleDateChange(date)}
-                                onChange= { handleDate }
+                                onChange= { handleSelectedDate }
                             />
-                            <Button onClick={() => handleSubmit(selectedDate)} variant="contained" color="primary" size="large" type="submit" fullWidth>Select</Button>
+                            <Button onClick={ handleSubmit } variant="contained" color="primary" size="large" type="submit" fullWidth>Select Date</Button>
+                            <Button onClick={ grabMonth } variant="contained" color="primary" size="large" type="submit" fullWidth>Grab Date</Button>
                         </div>
                     ) : (
                         <div>
-                            Fix later
+                            Fix later!
                         </div>
                         // <DatePicker
                         //     label="Week of Year / Month"
@@ -117,9 +127,6 @@ const Calender = (props) => {
                         //     labelFunc={this.formatWeekSelectLabel()}
                         // />
                     )}
-                    {/* <Typography>
-                        {selectedDate.month}
-                    </Typography> */}
                 </CardContent>
             </Card>
         </Container>

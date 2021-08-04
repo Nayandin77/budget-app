@@ -1,6 +1,7 @@
 import React, { useState, } from 'react';
-import { Grow, Container, Grid, Paper, Typography } from '@material-ui/core';
+import { Grow, Container, Grid, Paper, Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { useSelector, useStore, shallowEqual } from 'react-redux';
 
 import Calender from '../Calender/Calender';
 import Amount from '../Amount/Amount';
@@ -8,10 +9,28 @@ import Details from '../Details/Details';
 import Section from '../Section/Section';
 
 import useStyles from './styles';
+import { set } from 'date-fns';
 
 const Home = () => {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    // const store = useStore();
+    const user = JSON.parse(localStorage.getItem('profile'));
+
+    // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    // const user = useSelector((state) => state.auth.authData, shallowEqual);
+
     const classes = useStyles();
+
+    const test = useSelector((state) => state);
+
+    const testFunc = () => {
+        console.log(test);
+        console.log(user);
+        // console.log(test_user);
+    }
+
+    // useEffect(() => {
+        // setUser(JSON.parse(localStorage.getItem('profile')));
+    // }, [user]);
 
     return (
         <div>
@@ -23,7 +42,11 @@ const Home = () => {
                             <Grid item xs={12} sm={6} md={6}>
                                 <Amount />
                             </Grid>
-                            <Grid item xs={1} sm={3} md={3} />
+                            <Grid item xs={1} sm={3} md={3}>
+                                <Button onClick={testFunc}>
+                                    Test State
+                                </Button>
+                            </Grid> 
 
                             <Grid item xs={12} sm={6} md={4}>
                                 <Calender user={user} />

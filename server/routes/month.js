@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import auth from "../middleware/auth.js";
 
-import { createMonth, getAmount, createAmount, updateAmount, getDetails, getSection } from "../controllers/month.js";
+import { createMonth, getMonths, } from "../controllers/month.js";
 
 // router.get("/:id", auth, getAmount);
 // router.post("/:id", auth, createAmount);
@@ -10,8 +10,6 @@ import { createMonth, getAmount, createAmount, updateAmount, getDetails, getSect
 
 
 router.post("/", auth, createMonth);
-router.get("/", function(res, req, next) {
-    next("Test month");
-});
+router.get("/", auth, getMonths);
 
 export default router;

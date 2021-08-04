@@ -1,13 +1,24 @@
-import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_AMOUNT, CREATE, UPDATE, DELETE } from '../constants/actionTypes';
+import { CREATE, FETCH_ALL } from '../constants/actionTypes';
 
-export default (state = { isLoading: true, month: [] }, action) => {
+export default (state = { isLoading: true, months: [] }, action) => {
     switch (action.type) {
         case 'START_LOADING':
             return { ...state, isLoading: true };
         case 'END_LOADING':
             return { ...state, isLoading: false };
-        case FETCH_AMOUNT:
-            return { ...state, amount: action.payload.data };
+        case CREATE:
+            return { 
+                ...state.months,
+                // {
+
+                // }
+                months: action.payload.data 
+            };
+        case FETCH_ALL:
+            return { 
+                ...state.months, 
+                months: action.payload.data 
+            };
         default:
             return state;
     }
