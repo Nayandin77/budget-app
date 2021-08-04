@@ -2,21 +2,28 @@ Visualization of Client <-> Backend
 
 Auth.js
 - User creates account
-    - AUTH state gets created       (DONE)
-    - Mongo records User            (DONE)
+    X AUTH state gets created       
+    X Mongo records User            
 - User logs in
-    - AUTH state gets created       (DONE)
+    X AUTH state gets created       
     - MONTH state gets created
-    - API retrieves info User from Mongo (DONE)
-    - API retrieves info Months from Mongo (DONE)
+    X API retrieves info User from Mongo 
+    X API retrieves info Months from Mongo 
 - User logs out
-    - AUTH state is cleared         (DONE)
-    - MONTH state is cleared        (DONE)
+    X AUTH state is cleared         
+    X MONTH state is cleared        
 
 Home.js
-- Share User with all components (maybe with state I can fix auth from going null on refresh)
-- Display Sign In text if AUTH || locolstorage.profile is empty           (DONE)
-- Display components                                                      (DONE)
+    - Share User with all components (maybe with state I can fix auth from going null on refresh)
+    - Display Sign In text if AUTH || locolstorage.profile is empty           
+    X Display components                                                     
 
 Calender.js
-- 
+    X Display Calender
+    X Select Date (Month Year)
+        - If Month exist in state {MONTH}, retrieve data and display to other components (Amount, Details, Section)
+        - If Month does not exist in state {MONTH}, create new Month and add to state { Month }
+
+
+- Action / Reducers -
+type: AUTH, START_LOADING, END_LOADING, FETCH_BY_EMAIL, FETCH_ALL
