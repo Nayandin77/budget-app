@@ -1,18 +1,20 @@
-import { CREATE, FETCH_ALL } from '../constants/actionTypes';
+import { CREATE, FETCH_ALL, START_LOADING, END_LOADING } from '../constants/actionTypes';
 
-export default (state = { isLoading: true, months: [] }, action) => {
+function calender(state = { isLoading: true, months: [] }, action) {
     switch (action.type) {
-        case 'START_LOADING':
+        case START_LOADING:
             return { ...state, isLoading: true };
-        case 'END_LOADING':
+        case END_LOADING:
             return { ...state, isLoading: false };
         case CREATE:
-            return { 
-                ...state.months,
-                month: action.payload.data 
+            console.log(action.payload.data);
+            return {
+                ...state,
+                months: [...state.months, action.payload.data]
+                    // ...state.calender.months,
             };
         case FETCH_ALL:
-            console.log("Called FETCH_ALL function");
+            
             return { 
                 ...state.months, 
                 months: action.payload.data 
@@ -21,3 +23,5 @@ export default (state = { isLoading: true, months: [] }, action) => {
             return state;
     }
 };
+
+export default calender;

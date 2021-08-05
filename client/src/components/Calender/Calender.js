@@ -29,7 +29,8 @@ const Calender = (props) => {
             createdBy: props.user.result.email,
             month: selectedDate.getMonth(), 
             year: selectedDate.getFullYear(), 
-            _id: String(selectedDate.getMonth()) + String(selectedDate.getFullYear()) + String(props.user.result._id) 
+            _id: String(selectedDate.getMonth()) + String(selectedDate.getFullYear()) + String(props.user.result._id),
+            monthBudget: 0.00, 
         });
         dispatch(createMonth(parseDate));
     }

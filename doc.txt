@@ -27,3 +27,11 @@ Calender.js
 
 - Action / Reducers -
 type: AUTH, START_LOADING, END_LOADING, FETCH_BY_EMAIL, FETCH_ALL
+
+
+- Logic
+1. When User logs in, loads their Months data 
+2. Force a User to click "Select Date" in order to load user data
+3. 'Select Date' will:
+    a. Look through Months to find month
+    b. If no Month found, Create a Month

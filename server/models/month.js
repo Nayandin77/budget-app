@@ -5,7 +5,7 @@ const monthSchema = mongoose.Schema({
     createdBy: { type: String, required: true },
     month: { type: String, required:  true },
     year: { type: String, required: true },
-    monthBudget: String,
+    monthBudget: { type: Number, required: true },
     details: { 
         type: [String], 
         default: [],

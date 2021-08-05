@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import month from './month';
+import calender from './month';
 import auth from './auth';
 
-export const reducers = combineReducers({ month, auth });
+export const reducers = combineReducers({ calender, auth });
