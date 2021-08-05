@@ -33,3 +33,4 @@ npm start
 - Color Scheme: [Color Palette](https://colorpalettes.net/color-palette-4235/)
 - Material-UI: [Material-UI](https://material-ui.com/)
 - Tutorial on React Redux: [Tutorial](https://javascript.plainenglish.io/the-only-introduction-to-redux-and-react-redux-youll-ever-need-8ce5da9e53c6)
+- Creating Test Scripts: [React Test Scripts](https://create-react-app.dev/docs/running-tests/)
