@@ -11,16 +11,17 @@ import Section from '../Section/Section';
 import useStyles from './styles';
 // import { set } from 'date-fns';
 
-const Home = () => {
+const Home = (props) => {
     const user = JSON.parse(localStorage.getItem('profile'));
 
     const classes = useStyles();
 
-    const test = useSelector((state) => state);
+    const checkState = useSelector((state) => state);
 
     const testFunc = () => {
-        console.log(test);
+        console.log(checkState);
         console.log(user);
+        console.log(props);
         // console.log(test_user);
     }
 

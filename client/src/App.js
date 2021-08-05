@@ -11,7 +11,7 @@ import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
 // import { useStore } from 'react-redux';
 
-const App = () => {
+const App = (props) => {
   const user = JSON.parse(localStorage.getItem('profile'));
 
   return (

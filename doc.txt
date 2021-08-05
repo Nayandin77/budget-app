@@ -3,6 +3,10 @@ Visualization of Client <-> Backend
 - = needs to be done
 x = done
 
+- Theme 
+(fuck this)
+    - Pass through so many parent -> child
+
 - Auth.js
     - User creates account (add more)
         X AUTH state gets created       
