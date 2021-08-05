@@ -1,7 +1,7 @@
-import React, { useState, } from 'react';
+import React from 'react';
 import { Grow, Container, Grid, Paper, Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { useSelector, useStore, shallowEqual } from 'react-redux';
+import { useSelector, } from 'react-redux';
 
 import Calender from '../Calender/Calender';
 import Amount from '../Amount/Amount';
@@ -9,14 +9,10 @@ import Details from '../Details/Details';
 import Section from '../Section/Section';
 
 import useStyles from './styles';
-import { set } from 'date-fns';
+// import { set } from 'date-fns';
 
 const Home = () => {
-    // const store = useStore();
     const user = JSON.parse(localStorage.getItem('profile'));
-
-    // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-    // const user = useSelector((state) => state.auth.authData, shallowEqual);
 
     const classes = useStyles();
 

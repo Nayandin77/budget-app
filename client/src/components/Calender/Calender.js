@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Card, Typography, IconButton, CardContent, FormControl, FormLabel,
          RadioGroup, FormControlLabel, Radio, Button} from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
@@ -9,10 +9,10 @@ import endOfWeek from 'date-fns/endOfWeek';
 import startOfWeek from 'date-fns/startOfWeek';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import useStyles from './styles';
-import { monthNames } from './DateEnum/dateEnum';
+// import { monthNames } from './DateEnum/dateEnum';
 
 import { createMonth, getMonths } from '../../actions/month';
 
@@ -44,8 +44,8 @@ const Calender = (props) => {
         // dispatch(getMonths(props.user.result.email));
     // }, [dispatch, props.user])
 
-    /*
-    formatWeekSelectLabel = (date, invalidLabel) => {
+    
+    const formatWeekSelectLabel = (date, invalidLabel) => {
         let dateClone = date;
     
         return dateClone && isValid(dateClone)
@@ -53,8 +53,7 @@ const Calender = (props) => {
           : invalidLabel;
     };
     
-    renderWrappedWeekDay = (date, selectedDate, dayInCurrentMonth) => {
-        const { classes } = this.props;
+    const renderWrappedWeekDay = (date, selectedDate, dayInCurrentMonth) => {
         let dateClone = date;
         let selectedDateClone = selectedDate;
     
@@ -84,7 +83,7 @@ const Calender = (props) => {
           </div>
         );
     };
-    */
+    
 
     return (
         <Container>
@@ -116,17 +115,14 @@ const Calender = (props) => {
                             <Button onClick={ grabMonth } variant="contained" color="primary" size="large" type="submit" fullWidth>Grab Date</Button>
                         </div>
                     ) : (
-                        <div>
-                            Fix later!
-                        </div>
-                        // <DatePicker
-                        //     label="Week of Year / Month"
-                        //     helperText="Select Year, Month, and a Week"
-                        //     value={this.state.selectedDate}
-                        //     //onChange={handleWeekChange}
-                        //     renderDay={this.renderWrappedWeekDay()}
-                        //     labelFunc={this.formatWeekSelectLabel()}
-                        // />
+                        <DatePicker
+                            label="Week of Year / Month"
+                            helperText="Select Year, Month, and a Week"
+                            value={selectedDate}
+                            //onChange={handleWeekChange}
+                            renderDay={renderWrappedWeekDay}
+                            labelFunc={formatWeekSelectLabel}
+                        />
                     )}
                 </CardContent>
             </Card>

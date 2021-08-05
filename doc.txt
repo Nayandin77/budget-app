@@ -1,17 +1,17 @@
 Visualization of Client <-> Backend
 
-Auth.js
-- User creates account
-    X AUTH state gets created       
-    X Mongo records User            
-- User logs in
-    X AUTH state gets created       
+- Auth.js
+    - User creates account
+        X AUTH state gets created       
+        X Mongo records User            
+    - User logs in
+        X AUTH state gets created       
     - MONTH state gets created
-    X API retrieves info User from Mongo 
-    X API retrieves info Months from Mongo 
-- User logs out
-    X AUTH state is cleared         
-    X MONTH state is cleared        
+        X API retrieves info User from Mongo 
+        X API retrieves info Months from Mongo 
+    - User logs out
+        X AUTH state is cleared         
+        X MONTH state is cleared        
 
 Home.js
     - Share User with all components (maybe with state I can fix auth from going null on refresh)
@@ -20,7 +20,7 @@ Home.js
 
 Calender.js
     X Display Calender
-    X Select Date (Month Year)
+    X Select Date (Month Year)  
         - If Month exist in state {MONTH}, retrieve data and display to other components (Amount, Details, Section)
         - If Month does not exist in state {MONTH}, create new Month and add to state { Month }
 

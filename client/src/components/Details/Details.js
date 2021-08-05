@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Card, Typography, List, ListItem } from '@material-ui/core';
+import { Container, Card, Typography, List } from '@material-ui/core';
 
 const Details = () => {
+    /*
     const testData = {
         '0' : {
             'name': "Groceries",
@@ -36,9 +37,11 @@ const Details = () => {
             }
         },
     }
+    */
 
     const parseData = () => {
-        console.log(testData);
+        // console.log(testData);
+
         // return (
         //     <div>
         //         { testData?.map((item) => {
@@ -64,7 +67,7 @@ const Details = () => {
                     <ListItem>Item 3</ListItem>
                     <ListItem>Item 4</ListItem>
                     <ListItem>Item 5</ListItem> */}
-                    { parseData }
+                    { parseData() }
                 </List>
             </Card>
         </Container>

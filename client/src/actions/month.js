@@ -5,7 +5,7 @@ export const getMonths = (userEmail) => async (dispatch) => {
 
   try {
     const data = await api.getMonths(userEmail);
-
+    
     dispatch({ type: FETCH_ALL, payload: { data } });  
   } catch (error) {
     console.log(error);

@@ -12,6 +12,7 @@ export default (state = { isLoading: true, months: [] }, action) => {
                 month: action.payload.data 
             };
         case FETCH_ALL:
+            console.log("Called FETCH_ALL function");
             return { 
                 ...state.months, 
                 months: action.payload.data 
