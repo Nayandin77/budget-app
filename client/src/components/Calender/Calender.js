@@ -95,9 +95,6 @@ const Calender = (props) => {
 
     return (
         <Container>
-            <Button>
-                Test
-            </Button>
             <Card >
                 <CardContent>
                     <Typography className={classes.cardTitle} variant="h5">

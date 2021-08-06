@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Card, Button, Input, FormControl, InputLabel, InputAdornment } from '@material-ui/core';
+import { Container, Card, Input, FormControl, Button, InputLabel, InputAdornment } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
 import useStyles from './styles';
@@ -14,13 +14,14 @@ const Amount = () => {
 
     const classes = useStyles();
 
-    // const testFunc = () => {
-    //     console.log(amount);
-    // }
+    const testFunc = () => {
+        // dispatch so selected.month = amount
+        console.log(amount);
+    }
 
     // handle Set Amount for monthBudget
-    const handleChange = () => {
-
+    const handleChange = () => (event) => {
+        setAmount(event.target.value);
     }
 
     return (
@@ -35,11 +36,15 @@ const Amount = () => {
                         value={amount}
                         onChange={handleChange('amount')}
                         startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <Button onClick={testFunc}>
+                                    Set
+                                </Button>
+                            </InputAdornment>
+                        }
                     />
                 </FormControl>
-                {/* <Button onClick={testFunc}>
-                    Test Amount
-                </Button> */}
             </Card>
         </Container>
     )
