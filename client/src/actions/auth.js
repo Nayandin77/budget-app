@@ -9,7 +9,8 @@ export const signin = (formData, router) => async (dispatch) => {
 
     const email = {"userEmail": data.result.email};
     const months = await api.getMonths(email);
-    dispatch({ type: FETCH_ALL, payload: months });
+    
+    dispatch({ type: FETCH_ALL, payload: months.data });
 
     router.push('/');
   } catch (error) {

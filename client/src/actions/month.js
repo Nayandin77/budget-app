@@ -1,4 +1,4 @@
-import { START_LOADING, CREATE, FETCH_ALL, END_LOADING } from '../constants/actionTypes';
+import { START_LOADING, CREATE, FETCH_ALL, END_LOADING, SET_SELECTED_MONTH } from '../constants/actionTypes';
 import * as api from '../api/index';
 
 export const getMonths = (userEmail) => async (dispatch) => {
@@ -29,4 +29,10 @@ export const createMonth = (date) => async (dispatch) => {
     }
 };
 
-// export const
+export const selectMonth = (selected) => async (dispatch) => {
+    try {
+        dispatch({ type: SET_SELECTED_MONTH, payload: selected });
+    } catch (error) {
+        console.log(error);
+      }
+}

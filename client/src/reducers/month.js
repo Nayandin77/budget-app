@@ -1,4 +1,4 @@
-import { CREATE, FETCH_ALL, START_LOADING, END_LOADING } from '../constants/actionTypes';
+import { CREATE, FETCH_ALL, START_LOADING, END_LOADING, SET_SELECTED_MONTH } from '../constants/actionTypes';
 
 const initialState = {
     isLoading: true,
@@ -19,19 +19,23 @@ function calender(state = initialState, action) {
                 isLoading: false 
             };
         case CREATE: // only occurs when user selects a date not in user records
-            console.log(action.payload.data);
             return {
                 ...state,
                 months: [...state.months, action.payload.data],
                 selected: action.payload.data
             };
         case FETCH_ALL: // only occurs when user logs in
-            console.log(action.payload.data);
             return { 
                 // ...state.months = action.payload.data
                 ...state,
                 months: action.payload.data
             };
+        case SET_SELECTED_MONTH:
+            console.log(action.payload[0]);
+            return {
+                ...state,
+                selected: action.payload[0],
+            }
         default:
             return state;
     }
