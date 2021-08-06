@@ -32,6 +32,7 @@ const Auth = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        localStorage.removeItem('state');
     
         if (isSignup) {
             dispatch(signup(form, history));

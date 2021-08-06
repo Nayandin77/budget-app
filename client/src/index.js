@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import throttle from 'lodash/throttle';
+import { createTheme, ThemeProvider } from '@material-ui/core';
 
 import { reducers } from './reducers';
 import App from './App';
 import './index.css';
-import { createTheme, ThemeProvider } from '@material-ui/core';
 
-const store = createStore(reducers, {}, compose(applyMiddleware(thunk)));
-
+// Theme for palette
 const theme = createTheme({
   palette: {
     flower1: {
@@ -29,7 +29,38 @@ const theme = createTheme({
       main: '#f6f7cd'
     },
   }
-})
+});
+
+// lodash
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if(serializedState === null) {
+      return {};
+    }
+    return JSON.parse(serializedState);
+  } catch (e) {
+    return {};
+  }
+};
+
+const saveState = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch (e) {
+    // Ignore write errors;
+  }
+};
+
+const persistedState = loadState();
+
+const store = createStore(reducers, persistedState, compose(applyMiddleware(thunk)));
+
+store.subscribe(throttle(() => {
+  saveState(store.getState());
+}, 1000));
+
 
 ReactDOM.render(
   <Provider store={store}>

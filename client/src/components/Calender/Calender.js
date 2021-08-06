@@ -9,22 +9,31 @@ import endOfWeek from 'date-fns/endOfWeek';
 import startOfWeek from 'date-fns/startOfWeek';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import clsx from 'clsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
 // import { monthNames } from './DateEnum/dateEnum';
-
 import { createMonth, getMonths } from '../../actions/month';
 
 const Calender = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const [selectedDate, handleSelectedDate] = useState(new Date());
     const [monthWeek, handleToggle] = useState("month");
 
-    const dispatch = useDispatch();
+    const state = useSelector((state) => state);
+    const userMonths = state.calender.data;
 
     const handleSubmit = () => { 
+        // if can't find it in state.months, create new month, and make new month the state.selectedDate
+        // const selected = userMonths.filter(month => 
+        //     String(month.month) === String(selectedDate.getMonth()) &&
+        //     String(month.year) === String(selectedDate.getFullYear()) 
+        // );
+        // console.log(selected[0]);
+        
+
         const parseDate = ({
             createdBy: props.user.result.email,
             month: selectedDate.getMonth(), 
@@ -33,17 +42,14 @@ const Calender = (props) => {
             monthBudget: 0.00, 
         });
         dispatch(createMonth(parseDate));
+        // else, load up data as state.selectedDate
     }
 
-    const grabMonth = () => {
-        // const email = {"userEmail": props.user.result.email};
-        // dispatch(getMonths(email));
+    const testFunc = () => {
+        const email = {"userEmail": props.user.result.email};
+        dispatch(getMonths(email));
+        // dispatch(get)
     }
-
-    // useEffect(() => {
-        // if (props.user)
-        // dispatch(getMonths(props.user.result.email));
-    // }, [dispatch, props.user])
 
     
     const formatWeekSelectLabel = (date, invalidLabel) => {
@@ -113,7 +119,7 @@ const Calender = (props) => {
                                 onChange= { handleSelectedDate }
                             />
                             <Button onClick={ handleSubmit } variant="contained" color="primary" size="large" type="submit" fullWidth>Select Date</Button>
-                            <Button onClick={ grabMonth } variant="contained" color="primary" size="large" type="submit" fullWidth>Grab Date</Button>
+                            <Button onClick={ testFunc } variant="contained" color="primary" size="large" type="submit" fullWidth>Test</Button>
                         </div>
                     ) : (
                         <DatePicker
