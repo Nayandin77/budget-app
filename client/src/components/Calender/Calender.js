@@ -12,7 +12,6 @@ import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
-// import { monthNames } from './DateEnum/dateEnum';
 import { createMonth, selectMonth, getMonths } from '../../actions/month';
 
 const Calender = (props) => {

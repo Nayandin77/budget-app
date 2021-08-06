@@ -1,33 +1,45 @@
-import React from 'react'
-import { Container, Card, Typography, Button } from '@material-ui/core';
+import React, { useState } from 'react'
+import { Container, Card, Button, Input, FormControl, InputLabel, InputAdornment } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
 import useStyles from './styles';
+import { monthNames } from '../../constants/dateEnum';
 
 
 const Amount = () => {
-    // const selected = useSelector((store) => store.calender.months.data[0]);
+    const month = useSelector((store) => monthNames[store.calender.selected.month])
+    const initialValue = useSelector((store) => store.calender.selected.monthBudget);
 
-    // const amount = selected.
+    const [amount, setAmount] = useState(initialValue);
 
     const classes = useStyles();
 
-    const testFunc = () => {
-        // console.log(selected);
+    // const testFunc = () => {
+    //     console.log(amount);
+    // }
+
+    // handle Set Amount for monthBudget
+    const handleChange = () => {
+
     }
 
     return (
         <Container>
             <Card className={classes.card}>
-                <Typography className={classes.title} variant="h5">
-                    {/* Amount left in the { selected } */}
-                </Typography>
-                <Typography className={classes.amount} variant="h6">
-                    {/* $ { amount } */}
-                </Typography>
-                <Button onClick={testFunc}>
+                <FormControl fullWidth className={classes.margin}>
+                    <InputLabel htmlFor="standard-adornment-amount">
+                        {`Budget for ${month}`}
+                    </InputLabel>
+                    <Input
+                        id="standard-adornment-amount"
+                        value={amount}
+                        onChange={handleChange('amount')}
+                        startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    />
+                </FormControl>
+                {/* <Button onClick={testFunc}>
                     Test Amount
-                </Button>
+                </Button> */}
             </Card>
         </Container>
     )
