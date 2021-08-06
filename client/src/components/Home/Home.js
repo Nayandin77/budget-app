@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Grow, Container, Grid, Paper, Typography, Button } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link,  } from 'react-router-dom';
 import { useSelector, } from 'react-redux';
 
 import Calender from '../Calender/Calender';
@@ -9,29 +9,25 @@ import Details from '../Details/Details';
 import Section from '../Section/Section';
 
 import useStyles from './styles';
-import Auth from '../Auth/Auth';
-// import { set } from 'date-fns';
 
 const Home = (props) => {
     const user = JSON.parse(localStorage.getItem('profile'));
 
     const classes = useStyles();
-    const history = useHistory();
-
     const checkState = useSelector((state) => state);
+    const [month, setMonth] = useState(undefined);
 
-    // const [_switch, handleToggle] = useState("on");
-
-    const testFunc = () => {
-        console.log(checkState);
-        console.log(user);
-        console.log(props);
-        // console.log(test_user);
+    const setSelectedMonth = (month) => {
+        setMonth(month);
     }
 
-    // useEffect(() => {
-        // setUser(JSON.parse(localStorage.getItem('profile')));
-    // }, [user]);
+    const testFunc = () => {
+        // console.log(checkState);
+        // console.log(user);
+        // console.log(props);
+        console.log(month);
+    }
+
 
     return (
         <div>
@@ -53,7 +49,7 @@ const Home = (props) => {
                             </Grid> 
 
                             <Grid item xs={12} sm={6} md={4}>
-                                <Calender user={user} />
+                                <Calender user={user} onClick={setSelectedMonth} />
                             </Grid>
 
                             <Grid item xs={12} sm={6} md={4}>

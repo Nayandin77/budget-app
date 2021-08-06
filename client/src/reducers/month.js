@@ -31,7 +31,6 @@ function calender(state = initialState, action) {
                 months: action.payload.data
             };
         case SET_SELECTED_MONTH:
-            console.log(action.payload[0]);
             return {
                 ...state,
                 selected: action.payload[0],

@@ -40,16 +40,16 @@ const Calender = (props) => {
             });
             dispatch(createMonth(parseDate));
         } else { // else, load up data as state.selectedDate
-            // console.log(selected[0]);
             dispatch(selectMonth(selected));
         }
-        
-
+        props.onClick(selected[0]); // Sets Home component's Month to selected
     }
 
     const testFunc = () => {
-        const email = {"userEmail": props.user.result.email};
-        dispatch(getMonths(email));
+        // props.onClick("test");
+        // console.log(props);
+        // const email = {"userEmail": props.user.result.email};
+        // dispatch(getMonths(email));
     }
 
     

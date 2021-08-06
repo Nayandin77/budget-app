@@ -10,3 +10,6 @@ Tasks + Goals
     - When 'Set' is clicked, dispatch the selectedMonth to set with new month budget
 
 
+MAJOR
+    - Make Calender send Month (props.onClick) for a newly created Month,
+        if not found from within filter
