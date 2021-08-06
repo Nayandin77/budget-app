@@ -21,8 +21,8 @@ const App = (props) => {
           <Navbar />
           <Switch>
             <Route path="/" exact component={() => <Redirect to="/calender" />} />
-            <Route path="/calender" exact component={Home} />
             <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/calender" />)} />
+            <Route path="/calender" exact component={Home} />
           </Switch>
         </Container>
       </BrowserRouter>

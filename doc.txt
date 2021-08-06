@@ -1,43 +1,12 @@
-Visualization of Client <-> Backend
-
-- = needs to be done
-x = done
+Tasks + Goals
 
 - Theme 
-(fuck this)
     - Pass through so many parent -> child
 
-- Auth.js
-    - User creates account (add more)
-        X AUTH state gets created       
-        X Mongo records User            
-    - User logs in (add more + change naming)
-        X AUTH state gets created       
-        - MONTH state gets created
-            X API retrieves info User from Mongo 
-            X API retrieves info Months from Mongo 
-    - User logs out (change naming)
-        X AUTH state is cleared         
-        X MONTH state is cleared        
+- Auth.js + Home.js
+    - Fix routing, so on refresh the routing works as expected     
 
-Home.js (change naming, add more)
-    - Share User with all components (maybe with state I can fix auth from going null on refresh)
-    - Display Sign In text if AUTH || locolstorage.profile is empty           
-    X Display components                                                     
-
-Calender.js (change naming, add more)
-    X Display Calender
-    X Select Date (Month Year)  
-        - If Month exist in state {MONTH}, retrieve data and display to other components (Amount, Details, Section)
-        - If Month does not exist in state {MONTH}, create new Month and add to state { Month }
-
-
-- Logic (Action -> Reducers + {API}) 
-1. When User logs in, loads their Months data 
-2. Force a User to click "Select Date" in order to load user data
-3. 'Select Date' will:
-    a. Look through state.calender.months to find {month}
-    b. If no {month} found, create a {month}
-4. Load selected { month } data to components Amount, Details, Calender(auto), Section
+- Amount.js
+    - When 'Set' is clicked, dispatch the selectedMonth to set with new month budget
 
 
