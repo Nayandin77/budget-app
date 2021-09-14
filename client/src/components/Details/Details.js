@@ -1,8 +1,8 @@
 import React from 'react';
-import { Container, Card, Typography, List } from '@material-ui/core';
+import { Container, Card, Typography, List, ListItem, Button } from '@material-ui/core';
 
 const Details = () => {
-    /*
+    
     const testData = {
         '0' : {
             'name': "Groceries",
@@ -37,21 +37,19 @@ const Details = () => {
             }
         },
     }
-    */
+    
 
-    const parseData = () => {
-        // console.log(testData);
-
-        // return (
-        //     <div>
-        //         { testData?.map((item) => {
-        //             console.log(item); 
-        //             ( <ListItem>{item}</ListItem> )
-        //         })
-        //         }
-        //     </div>
-            
-        // );
+    const parseData = () => { 
+        const array = [];    
+        for (const [key, value] of Object.entries(testData)) {
+            array.push(value.name);
+        }
+     
+        return (
+            <div>
+                { array.map((item) => <ListItem>{item}</ListItem> )}
+            </div>
+        );
     }
 
 
@@ -61,6 +59,8 @@ const Details = () => {
                 <Typography>
                     Details
                 </Typography>
+                <Button>Add</Button>
+                <Button></Button>
                 <List>
                     {/* <ListItem button={true}>Item 1</ListItem>
                     <ListItem>Item 2</ListItem>

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { Grow, Container, Grid, Paper, Typography, Button } from '@material-ui/core';
 import { Link,  } from 'react-router-dom';
-import { useSelector, } from 'react-redux';
 
 import Calender from '../Calender/Calender';
 import Amount from '../Amount/Amount';
@@ -12,21 +11,13 @@ import useStyles from './styles';
 
 const Home = (props) => {
     const user = JSON.parse(localStorage.getItem('profile'));
-
     const classes = useStyles();
-    const checkState = useSelector((state) => state);
-    const [month, setMonth] = useState(undefined);
-
-    const setSelectedMonth = (month) => {
-        setMonth(month);
-    }
-
-    const testFunc = () => {
-        // console.log(checkState);
-        // console.log(user);
-        // console.log(props);
-        console.log(month);
-    }
+ 
+    // const testFunc = () => {
+    //     // console.log(checkState);
+    //     // console.log(user);
+    //     // console.log(props);
+    // }
 
 
     return (
@@ -40,16 +31,16 @@ const Home = (props) => {
                                 <Amount />
                             </Grid>
                             <Grid item xs={1} sm={3} md={3}>
-                                <Button onClick={testFunc}>
+                                {/* <Button onClick={testFunc}>
                                     Test State
-                                </Button>
+                                </Button> */}
                                 {/* <Button onClick={() => handleToggle(_switch === "on" ? "off" : "on")}>
                                     { _switch }
                                 </Button> */}
                             </Grid> 
 
                             <Grid item xs={12} sm={6} md={4}>
-                                <Calender user={user} onClick={setSelectedMonth} />
+                                <Calender />
                             </Grid>
 
                             <Grid item xs={12} sm={6} md={4}>
@@ -57,7 +48,7 @@ const Home = (props) => {
                             </Grid>
 
                             <Grid item xs={12} sm={6} md={4}>
-                                <Section />
+                                {/* <Section /> */}
                             </Grid>
 
                         </Grid>

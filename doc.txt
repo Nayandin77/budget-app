@@ -7,7 +7,7 @@ Tasks + Goals
     - Fix routing, so on refresh the routing works as expected     
 
 - Amount.js
-    - When 'Set' is clicked, dispatch the selectedMonth to set with new month budget
+    - Update amount variable when month is changed
 
 
 MAJOR

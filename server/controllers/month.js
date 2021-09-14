@@ -29,3 +29,17 @@ export const getMonths = async (req, res) => {
     }
 
 }
+
+export const updateMonth = async (req, res) => {
+    // retrieve amount from req
+    const month = req.body;
+    const id = req.body._id;
+
+    try {
+        const changedMonth = await Month.findByIdAndUpdate(id, month);
+
+        res.json(changedMonth);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}

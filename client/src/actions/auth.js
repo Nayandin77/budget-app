@@ -3,6 +3,8 @@ import * as api from '../api/index.js';
 
 export const signin = (formData, router) => async (dispatch) => {
   try {
+    formData.email = formData.email.toLowerCase();
+    console.log(formData)
     // Must be first since AUTH state needs to be done before next dispatch
     const { data } = await api.signIn(formData);
     dispatch({ type: AUTH, data });
@@ -20,6 +22,7 @@ export const signin = (formData, router) => async (dispatch) => {
 
 export const signup = (formData, router) => async (dispatch) => {
   try {
+    formData.email = formData.email.toLowerCase();
     const { data } = await api.signUp(formData);
 
     dispatch({ type: AUTH, data });
