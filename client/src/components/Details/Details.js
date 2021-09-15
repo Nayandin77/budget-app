@@ -72,20 +72,13 @@ const Details = () => {
                     Details
                 </Typography>
                 
-                <List>
-                    { details.map((item) => (
-                        <ListItem>{item.name}</ListItem>
-                    )) }
-                </List>
+                <DetailsList list={details} />
 
-                <div>
-                    <Button onClick={handleAdd()}>Add</Button>
-                    <Input 
-                        type="text"
-                        value={detail}
-                        onChange={handleChange()}
-                    />
-                </div>
+                <AddItem
+                    detail={detail}
+                    onChange={handleChange}
+                    onAdd={handleAdd}
+                />
                 
             </Card>
         </Container>
@@ -93,3 +86,22 @@ const Details = () => {
 }
 
 export default Details;
+
+const AddItem = ({ detail, onChange, onAdd }) => (
+    <div>
+        <Button onClick={onAdd}>Add</Button>
+        <Input 
+            type="text"
+            value={detail}
+            onChange={onChange}
+        />
+    </div>
+);
+
+const DetailsList = ({ list }) => (
+    <List>
+        { list.map((item) => (
+            <ListItem>{item.name}</ListItem>
+        )) }
+    </List>
+);
