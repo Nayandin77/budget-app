@@ -1,15 +1,18 @@
-Tasks + Goals
+Tasks
 
-- Theme 
-    - Pass through so many parent -> child
+- Amount.js
+    - Update amount variable when month is changed
+    - [ maybe use same scheme as Details.js ]
+
+- Modify Actions / Reducers for each component:
+    - Calender
+    - Amount
+    - Details
+    - Section (do after Component is made)
 
 - Auth.js + Home.js
     - Fix routing, so on refresh the routing works as expected     
 
-- Amount.js
-    - Update amount variable when month is changed
+- Theme 
+    - Pass through so many parent -> child
 
-
-MAJOR
-    - Make Calender send Month (props.onClick) for a newly created Month,
-        if not found from within filter
