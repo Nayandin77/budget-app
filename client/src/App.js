@@ -20,8 +20,8 @@ const App = (props) => {
         <Container maxWidth="xl">
           <Navbar />
           <Switch>
-            <Route path="/" exact component={() => <Redirect to="/calender" />} />
-            <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/calender" />)} />
+            <Route path="/" exact component={() => <Redirect to="/calender/" />} />
+            <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/calender/" />)} />
             <Route path="/calender" exact component={Home} />
           </Switch>
         </Container>

@@ -35,11 +35,14 @@ export const updateMonth = async (req, res) => {
     const month = req.body;
     const id = req.body._id;
 
+    const options = {returnOriginal: false}
+
     try {
-        const changedMonth = await Month.findByIdAndUpdate(id, month);
+        const changedMonth = await Month.findByIdAndUpdate(id, month, options);
 
         res.json(changedMonth);
     } catch (error) {
+        console.log("try error");
         res.status(404).json({ message: error.message });
     }
 }

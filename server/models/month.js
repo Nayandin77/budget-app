@@ -7,9 +7,9 @@ const monthSchema = mongoose.Schema({
     year: { type: String, required: true },
     monthBudget: { type: Number, required: true },
     details: { 
-        type: [String], 
+        // type: [String], 
         default: [],
-        expenses: { type: [String], default: [] }
+        // expenses: { type: [String], default: [] }
     },
 
 });

@@ -1,5 +1,5 @@
 import { CREATE, FETCH_ALL, START_LOADING, END_LOADING, 
-    SET_SELECTED_MONTH, SET_AMOUNT } from '../constants/actionTypes';
+    SET_SELECTED_MONTH, SET_AMOUNT, ADD_ITEM } from '../constants/actionTypes';
 
 const initialState = {
     isLoading: true,
@@ -7,7 +7,7 @@ const initialState = {
     selected: false,
 }
 
-function calender(state = initialState, action) {
+function month(state = initialState, action) {
     switch (action.type) {
         case START_LOADING:
             return { 
@@ -43,9 +43,18 @@ function calender(state = initialState, action) {
                     monthBudget: action.payload
                 }
             }
+        case ADD_ITEM:
+            return {
+                ...state,
+                selected: {
+                    ...state.selected,
+                    details: action.payload
+                },
+                 
+            }
         default:
             return state;
     }
 };
 
-export default calender;
+export default month;

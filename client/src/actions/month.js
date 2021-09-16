@@ -1,5 +1,5 @@
 import { START_LOADING, CREATE, FETCH_ALL, END_LOADING, 
-    SET_SELECTED_MONTH, SET_AMOUNT } from '../constants/actionTypes';
+    SET_SELECTED_MONTH, SET_AMOUNT, ADD_ITEM } from '../constants/actionTypes';
 import * as api from '../api/index';
 
 export const getMonths = (userEmail) => async (dispatch) => {
@@ -32,7 +32,14 @@ export const createMonth = (date) => async (dispatch) => {
 
 export const selectMonth = (selected) => async (dispatch) => {
     try {
+        // Signal Loading state
+        dispatch({ type: START_LOADING });
+
+        //
         dispatch({ type: SET_SELECTED_MONTH, payload: selected });
+
+        // Signal end of Loading state
+        dispatch({ type: END_LOADING });
     } catch (error) {
         console.log(error);
     }
@@ -42,11 +49,33 @@ export const updateAmount = (amount, month) => async (dispatch) => {
     month.monthBudget = amount;
 
     try {
+        // Signal Loading state
+        dispatch({ type: START_LOADING });
+
         const updatedMonth = await api.updateMonth(month);
 
         dispatch({ type: SET_SELECTED_MONTH, payload: updatedMonth.data });
 
         dispatch({ type: SET_AMOUNT, payload: amount });
+        // Signal end of Loading state
+        dispatch({ type: END_LOADING });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const addItem = (details, month) => async (dispatch) => {
+    month.details = details;
+
+    try {
+        // API call to update DB month->details
+        const updatedMonth = await api.updateMonth(month);
+        
+        // dispatch to Update state.month.months
+        dispatch({ type: SET_SELECTED_MONTH, payload: updatedMonth.data });
+
+        // dispatch to Update state.month.selected
+        dispatch({ type: ADD_ITEM, payload: details });
     } catch (error) {
         console.log(error);
     }

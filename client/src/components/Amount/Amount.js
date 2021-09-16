@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Container, Card, Input, FormControl, Button, InputLabel, InputAdornment } from '@material-ui/core';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 
@@ -7,51 +7,49 @@ import { monthNames } from '../../constants/dateEnum';
 import { updateAmount } from '../../actions/month';
 
 
+
 const Amount = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const months = useSelector((store) => store.calender.months);
-    const month = useSelector((store) => !store.calender.selected ? "Not Selected" : store.calender.selected);
-    const initialAmount = useSelector((store) => !store.calender.selected ? "Not Selected" : store.calender.selected.monthBudget);
-
-    // const [amount, setAmount] = useState(document.getElementById("standard-adornment-amount").value = month.monthBudget);
+    const month = useSelector((store) => store.month);
+    const months = useSelector((store) => store.month.months);
+    const selectedMonth = useSelector((store) => !store.month.selected || store.month.selected === false ? "Not Selected" : store.month.selected);
+    const initialAmount = useSelector((store) => !store.month.selected ? "Not Selected" : store.month.selected.monthBudget);
+    
     const [amount, setAmount] = useState(initialAmount);
 
+    const prevSelectedMonth = usePrevious(selectedMonth);
 
     // Update Value when Selected Month changes
     useEffect(() => {
-        document.getElementById("standard-adornment-amount").value = month.monthBudget;
+        if (prevSelectedMonth !== selectedMonth) {
+            setAmount(selectedMonth.monthBudget);
+        }
     })
-
-    // need to update amount
 
     // Update Selected Month, Selected Month's MonthBudget based on amount
     const saveAmount = () => {
         setAmount(amount);
-        dispatch(updateAmount(amount, month));
 
-        const index = months.findIndex((temp) => temp._id === month._id);
-        months[index] = month;
+        dispatch(updateAmount(amount, selectedMonth));
+
+        const index = months.findIndex((temp) => temp._id === selectedMonth._id);
+        months[index] = selectedMonth;
     }
 
-    // Handle change of input for amount
-    const handleChange = () => (event) => {
-        // event.preventDefault();
-        setAmount(event.target.value);
-    }
 
     return (
         <Container>
             <Card className={classes.card}>
                 <FormControl fullWidth className={classes.margin}>
                     <InputLabel htmlFor="standard-adornment-amount">
-                        { month === undefined ? "none selected" : `Budget for ${monthNames[month.month]}` }
+                        { selectedMonth === undefined ? "none selected" : `Budget for ${monthNames[selectedMonth.month]}` }
                     </InputLabel>
                     <Input
                         id="standard-adornment-amount"
                         value={amount}
-                        onChange={handleChange()}
+                        onChange={(event) => setAmount(event.target.value) }
                         startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         endAdornment={
                             <InputAdornment position="end">
@@ -65,6 +63,16 @@ const Amount = () => {
             </Card>
         </Container>
     )
+}
+
+const usePrevious = (oldValue) => {
+    const ref = useRef();
+    
+    useEffect(() => {
+        ref.current = oldValue;
+    }, [oldValue]);
+
+    return ref.current;
 }
 
 export default Amount;

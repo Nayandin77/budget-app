@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Card, Typography, IconButton, CardContent, FormControl, FormLabel,
          RadioGroup, FormControlLabel, Radio, Button} from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
@@ -18,12 +18,12 @@ const Calender = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const initialMonth = useSelector((store) => !store.calender.selected ? new Date() : new Date(store.calender.selected.year, store.calender.selected.month));
+    const initialMonth = useSelector((store) => !store.month.selected ? new Date() : new Date(store.month.selected.year, store.month.selected.month));
     const [selectedDate, handleSelectedDate] = useState(initialMonth);
 
     const [monthWeek, handleToggle] = useState("month");
 
-    const userMonths = useSelector((store) => store.calender.months);
+    const userMonths = useSelector((store) => store.month.months);
     const user = useSelector((store) => store.auth.authData.result);
 
     const handleSubmit = () => {
@@ -33,6 +33,7 @@ const Calender = () => {
             String(month.month) === String(selectedDate.getMonth()) &&
             String(month.year) === String(selectedDate.getFullYear())  
         );
+
 
         if (selected[0] !== undefined) {
             dispatch(selectMonth(selected[0]));
@@ -51,14 +52,7 @@ const Calender = () => {
         
     }
 
-    // const testFunc = () => {
-        // props.onClick("test");
-        // console.log(props);
-        // const email = {"userEmail": props.user.result.email};
-        // dispatch(getMonths(email));
-    // }
 
-    
     const formatWeekSelectLabel = (date, invalidLabel) => {
         let dateClone = date;
     
@@ -123,7 +117,6 @@ const Calender = () => {
                                 onChange= { handleSelectedDate }
                             />
                             <Button onClick={ handleSubmit } variant="contained" color="primary" size="large" type="submit" fullWidth>Select Date</Button>
-                            {/* <Button onClick={ testFunc } variant="contained" color="primary" size="large" type="submit" fullWidth>Test</Button> */}
                         </div>
                     ) : (
                         <DatePicker

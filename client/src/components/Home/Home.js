@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {} from 'react';
 import { Grow, Container, Grid, Paper, Typography, Button } from '@material-ui/core';
 import { Link,  } from 'react-router-dom';
 
@@ -13,11 +13,9 @@ const Home = (props) => {
     const user = JSON.parse(localStorage.getItem('profile'));
     const classes = useStyles();
  
-    // const testFunc = () => {
-    //     // console.log(checkState);
-    //     // console.log(user);
-    //     // console.log(props);
-    // }
+    const testFunc = () => {
+        // console.log();
+    }
 
 
     return (
