@@ -5,6 +5,7 @@ const initialState = {
     isLoading: true,
     months: [],
     selected: false,
+    selectedDetail: false,
 }
 
 function month(state = initialState, action) {

@@ -33,6 +33,8 @@ const Details = () => {
 
     const handleChange = () => (event) => {
         setDetail(event.target.value);
+
+        // dispatch selectedDetails
     }
 
     // Adds Detail to Details
@@ -126,12 +128,6 @@ const AddItem = ({ detail, onChange, onAdd }) => (
         />
     </div>
 );
-
-const RemoveItem = ({ name, onClick }) => (
-    <div>
-        
-    </div>
-)
 
 const EditItem = ({  }) => (
     <div>
