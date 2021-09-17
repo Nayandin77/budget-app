@@ -80,3 +80,20 @@ export const addItem = (details, month) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const removeItem = (details, month) => async (dispatch) => {
+    month.details = details;
+    
+    try {
+        // API call to update DB month->details
+        const updatedMonth = await api.updateMonth(month);
+        
+        // dispatch to Update state.month.months
+        dispatch({ type: SET_SELECTED_MONTH, payload: updatedMonth.data });
+
+        // dispatch to Update state.month.selected
+        dispatch({ type: ADD_ITEM, payload: details });
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -1,14 +1,7 @@
 Tasks
 
-- Amount.js
-    - Update amount variable when month is changed
-    - [ maybe use same scheme as Details.js ]
-
-- Modify Actions / Reducers for each component:
-    - Calender
-    - Amount
-    - Details
-    - Section (do after Component is made)
+- Action / Reducers
+    - Clean up redundency
 
 - Auth.js + Home.js
     - Fix routing, so on refresh the routing works as expected     

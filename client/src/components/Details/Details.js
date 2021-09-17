@@ -1,51 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Container, Card, Typography, List, ListItem, Button, Input } from '@material-ui/core';
-import ListItemButton from '@mui/material/ListItemButton';
+import { Container, Card, Typography, List, Button, Input } from '@material-ui/core';
+import { ListItemButton, IconButton, ListItem, ListItemText} from '@mui/material/';
 
 import { useDispatch, useSelector } from 'react-redux';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@mui/icons-material/Add';
 
-import { addItem } from '../../actions/month';
-
-const testData = [
-    {
-        id: 1,
-        name: "Groceries",
-        items: {
-            0: "test 0",
-            1: "test 1",
-            2: "test 2",
-        },
-    },
-    {
-        id: 2,
-        name: "Sports",
-        items: {
-            0: "test 0",
-            1: "test 1",
-            2: "test 2",
-        },
-    },
-    {
-        id: 3,
-        name: "Miscellaneous",
-        items: {
-            0: "test 0",
-            1: "test 1",
-            2: "test 2",
-        }
-    },
-    {
-        id: 4,
-        name: "House Hold Items",
-        items: {
-            0: "test 0",
-            1: "test 1",
-            2: "test 2",
-        }
-    },
-];
+import { addItem, removeItem } from '../../actions/month';
 
 
 const Details = () => {
@@ -55,16 +17,8 @@ const Details = () => {
     const selectedMonth = useSelector((store) => !store.month.selected ? '' : store.month.selected);
     const months = useSelector((store) => store.month.months);
 
-    const [selectedIndex, setSelectedIndex] = useState(1);
+    const [selectedIndex, setSelectedIndex] = useState(-1);
 
-    const handleListItemClick = (event, index) => {
-        setSelectedIndex(index);
-        console.log(index);
-      };
-
-      // fix selected Index on Frontend
-
-    // const [details, setDetails] = useState(testData);
     const [details, setDetails] = useState(initialData);
     const [detail, setDetail] = useState('');
 
@@ -81,6 +35,7 @@ const Details = () => {
         setDetail(event.target.value);
     }
 
+    // Adds Detail to Details
     const handleAdd = () => (event) => {
         const parseDetail = {
             name: detail,
@@ -96,28 +51,53 @@ const Details = () => {
         months[index] = selectedMonth;
     }
 
-    const test = () => {
-        console.log(details)
+    const handleListItemClick = (index) => {
+        setSelectedIndex(index);
+        console.log(index)
+        // dispatch
+    };
+
+    // Removes Detail from Details
+    const handleRemove = (name) => {
+        const newDetails = details.filter((item) => item.name !== name);
+
+        setDetails(newDetails);
+
+        dispatch(removeItem(newDetails, selectedMonth));
+
+        const index = months.findIndex((temp) => temp._id === selectedMonth._id);
+        months[index] = selectedMonth;
     }
+
+    // const test = () => {
+    //     console.log(details)
+    // }
     
     return (
         <Container>
             <Card>
-                <Button onClick={test()}>Test</Button>
+                {/* <Button onClick={test()}>Test</Button> */}
                 <Typography>
                     Details
                 </Typography>
                 
                 <List>
-                    { details.map((item, index) => (
-                        <ListItemButton
-                            selected={ selectedIndex === {index} }
-                            onClick={(event) => handleListItemClick(event, index)}
-                        >
-                            {item.name}
-                            <EditItem />
-                            <RemoveItem /> 
-                        </ListItemButton>
+                    { details?.map((item, index) => (
+                        <div>
+                            <ListItem>
+                                <ListItemButton
+                                    selected={ selectedIndex === index }
+                                    onClick={() => handleListItemClick(index)}
+                                >
+                                <ListItemText primary={item.name} />
+                                </ListItemButton>
+                                <Button onClick={() => handleRemove(item.name)}>
+                                    <DeleteIcon />
+                                </Button>
+                            </ListItem>
+                            
+                        </div>
+                                         
                     )) }
                 </List>
 
@@ -126,6 +106,8 @@ const Details = () => {
                     onChange={handleChange()}
                     onAdd={handleAdd()}
                 />
+
+                
                 
             </Card>
         </Container>
@@ -136,7 +118,7 @@ export default Details;
 
 const AddItem = ({ detail, onChange, onAdd }) => (
     <div>
-        <Button onClick={onAdd}>Add</Button>
+        <Button onClick={onAdd}><AddIcon /></Button>
         <Input 
             type="text"
             value={detail}
@@ -145,26 +127,9 @@ const AddItem = ({ detail, onChange, onAdd }) => (
     </div>
 );
 
-// const DetailsList = ({ list, selected }) => (
-//     <List>
-        
-//         { list.map((item, index) => (
-//             <ListItemButton
-//                 selected={selected === index}
-//                 onClick={(event) => handleListItemClick(event, index)}
-//             >
-//                 {item.name}
-//                 {index}
-//                 <EditItem />
-//                 <RemoveItem /> 
-//             </ListItemButton>
-//         )) }
-//     </List>
-// );
-
-const RemoveItem = ({  }) => (
+const RemoveItem = ({ name, onClick }) => (
     <div>
-        <Button><DeleteForeverIcon /></Button>
+        
     </div>
 )
 
