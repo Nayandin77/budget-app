@@ -46,7 +46,7 @@ const Home = (props) => {
                             </Grid>
 
                             <Grid item xs={12} sm={6} md={4}>
-                                {/* <Section /> */}
+                                <Section />
                             </Grid>
 
                         </Grid>

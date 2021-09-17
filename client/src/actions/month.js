@@ -1,5 +1,5 @@
 import { START_LOADING, CREATE, FETCH_ALL, END_LOADING, 
-    SET_SELECTED_MONTH, SET_AMOUNT, ADD_ITEM } from '../constants/actionTypes';
+    SET_SELECTED_MONTH, SET_AMOUNT, ADD_ITEM, SET_SELECTED_DETAIL } from '../constants/actionTypes';
 import * as api from '../api/index';
 
 export const getMonths = (userEmail) => async (dispatch) => {
@@ -83,7 +83,7 @@ export const addItem = (details, month) => async (dispatch) => {
 
 export const removeItem = (details, month) => async (dispatch) => {
     month.details = details;
-    
+
     try {
         // API call to update DB month->details
         const updatedMonth = await api.updateMonth(month);
@@ -95,5 +95,18 @@ export const removeItem = (details, month) => async (dispatch) => {
         dispatch({ type: ADD_ITEM, payload: details });
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const selectedDetail = (detail) => async (dispatch) => {
+    try {
+        // Signal start of Loading state
+        dispatch({ type: START_LOADING });
+        // Signal state to set month.selectedDetail
+        dispatch({ type: SET_SELECTED_DETAIL, payload: detail });
+        // Signal end of Loading state
+        dispatch({ type: END_LOADING });
+    } catch (error) {
+        console.log("Action:", error);
     }
 }

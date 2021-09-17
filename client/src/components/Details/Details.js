@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
-import { addItem, removeItem } from '../../actions/month';
+import { addItem, removeItem, selectedDetail } from '../../actions/month';
 
 
 const Details = () => {
@@ -55,8 +55,8 @@ const Details = () => {
 
     const handleListItemClick = (index) => {
         setSelectedIndex(index);
-        console.log(index)
-        // dispatch
+        console.log(details[index])
+        dispatch(selectedDetail(details[index]));
     };
 
     // Removes Detail from Details

@@ -12,6 +12,7 @@ export const SET_AMOUNT = 'SET_AMOUNT';
 
 // Section
 export const ADD_ITEM = 'ADD_ITEM';
+export const SET_SELECTED_DETAIL = 'SET_SELECTED_DETAIL';
 
 // Shared
 export const END_LOADING = 'END_LOADING';

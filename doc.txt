@@ -3,6 +3,9 @@ Tasks
 - Action / Reducers
     - Clean up redundency
 
+- Details.js
+    - Edit Item Name
+
 - Auth.js + Home.js
     - Fix routing, so on refresh the routing works as expected     
 

@@ -1,5 +1,5 @@
 import { CREATE, FETCH_ALL, START_LOADING, END_LOADING, 
-    SET_SELECTED_MONTH, SET_AMOUNT, ADD_ITEM } from '../constants/actionTypes';
+    SET_SELECTED_MONTH, SET_AMOUNT, ADD_ITEM, SET_SELECTED_DETAIL } from '../constants/actionTypes';
 
 const initialState = {
     isLoading: true,
@@ -52,6 +52,11 @@ function month(state = initialState, action) {
                     details: action.payload
                 },
                  
+            }
+        case SET_SELECTED_DETAIL:
+            return {
+                ...state,
+                selectedDetail: action.payload,
             }
         default:
             return state;
