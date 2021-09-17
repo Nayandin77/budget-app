@@ -80,7 +80,7 @@ const Details = () => {
             <Card>
                 {/* <Button onClick={test()}>Test</Button> */}
                 <Typography>
-                    Details
+                    { selectedMonth ? 'Details' : 'Details (Select a Date please)' }
                 </Typography>
                 
                 <List>
@@ -97,9 +97,7 @@ const Details = () => {
                                     <DeleteIcon />
                                 </Button>
                             </ListItem>
-                            
                         </div>
-                                         
                     )) }
                 </List>
 
@@ -108,9 +106,6 @@ const Details = () => {
                     onChange={handleChange()}
                     onAdd={handleAdd()}
                 />
-
-                
-                
             </Card>
         </Container>
     )
