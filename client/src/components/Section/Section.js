@@ -32,7 +32,7 @@ const Section = () => {
                     { detail.items?.map((item, index) => (
                         <div>
                             <ListItem>
-                                Test
+                                {item}
                             </ListItem>
                         </div>
                     ))}

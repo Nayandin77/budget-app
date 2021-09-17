@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Container, Card, Typography, List, Button, Input } from '@material-ui/core';
-import { ListItemButton, IconButton, ListItem, ListItemText} from '@mui/material/';
+import { Container, Card, Typography, List, Button, Input, TextField, CardContent } from '@material-ui/core';
+import { ListItemButton, ListItem, ListItemText, TableContainer, Table, TableBody, TableCell, TableRow, Paper} from '@mui/material/';
 
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -8,10 +8,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@mui/icons-material/Add';
 
 import { addItem, removeItem, selectedDetail } from '../../actions/month';
+import { monthNames } from '../../constants/dateEnum';
+import useStyles from './styles';
 
 
 const Details = () => {
     const dispatch = useDispatch();
+    const classes = useStyles();
 
     const initialData = useSelector((store) => !store.month.selected.details ? [] : store.month.selected.details);
     const selectedMonth = useSelector((store) => !store.month.selected ? '' : store.month.selected);
@@ -31,9 +34,15 @@ const Details = () => {
         }
     })
 
-    const handleChange = () => (event) => {
+    const handleChangeName = () => (event) => {
         setDetail(event.target.value);
+        console.log(event.target.value)
+        // dispatch selectedDetails
+    }
 
+    const handleChangeValue = () => (event) => {
+        // setDetail(event.target.value);
+        console.log("test", event.target.value);
         // dispatch selectedDetails
     }
 
@@ -78,10 +87,53 @@ const Details = () => {
     return (
         <Container>
             <Card>
+                <CardContent>
+                    <Typography className={classes.cardTitle} variant="h6">
+                        { selectedMonth ? `Details for ${monthNames[selectedMonth.month]}` : 'Details (Select a Date please)' }
+                    </Typography>
+                </CardContent>
                 {/* <Button onClick={test()}>Test</Button> */}
-                <Typography>
-                    { selectedMonth ? 'Details' : 'Details (Select a Date please)' }
-                </Typography>
+                
+                <TableContainer component={Paper}>
+                    <Table >
+                        <TableBody>
+                            { details?.map((item, index) => (
+                                <TableRow>
+                                    <TableCell />
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>100</TableCell>
+                                    <TableCell>
+                                        <Button onClick={() => handleRemove(item.name)}>
+                                            <DeleteIcon />
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            )) }
+                            <TableRow>
+                                <TableCell>
+                                    <Button onClick={handleAdd()}><AddIcon /></Button>
+                                </TableCell>
+                                <TableCell>
+                                    <TextField
+                                        required
+                                        label="Name"
+                                        type="text"
+                                        size="small"
+                                        onChange={handleChangeName()}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <TextField
+                                        required
+                                        label="Amount"
+                                        type="number"
+                                        size="small"
+                                    />
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
                 
                 <List>
                     { details?.map((item, index) => (
@@ -103,7 +155,7 @@ const Details = () => {
 
                 <AddItem
                     detail={detail}
-                    onChange={handleChange()}
+                    onChange={handleChangeName()}
                     onAdd={handleAdd()}
                 />
             </Card>
