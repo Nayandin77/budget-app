@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Container, Card, Input, FormControl, Button, InputLabel, InputAdornment } from '@material-ui/core';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
 import { monthNames } from '../../constants/dateEnum';
@@ -12,7 +12,7 @@ const Amount = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const month = useSelector((store) => store.month);
+    // const month = useSelector((store) => store.month);
     const months = useSelector((store) => store.month.months);
     const selectedMonth = useSelector((store) => !store.month.selected || store.month.selected === false ? "Not Selected" : store.month.selected);
     const initialAmount = useSelector((store) => !store.month.selected ? "Not Selected" : store.month.selected.monthBudget);
@@ -26,7 +26,7 @@ const Amount = () => {
         if (prevSelectedMonth !== selectedMonth) {
             setAmount(selectedMonth.monthBudget);
         }
-    })
+    }, []);
 
     // Update Selected Month, Selected Month's MonthBudget based on amount
     const saveAmount = () => {

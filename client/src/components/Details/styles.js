@@ -4,4 +4,7 @@ export default makeStyles((theme) => ({
     cardTitle: {
         alignSelf: "center",
     },
+    row: {
+        border: "1px solid black"
+    },
 }))
